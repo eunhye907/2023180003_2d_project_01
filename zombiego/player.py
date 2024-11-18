@@ -1,12 +1,13 @@
 from pico2d import get_time, load_image, SDL_KEYDOWN, SDL_KEYUP, SDLK_SPACE, SDLK_LEFT, SDLK_RIGHT
 
 import zombie
-from state_machine import*
+from state_machine import start_event, right_down, left_up, left_down, right_up, space_down, StateMachine, time_out
 from arrow import R_arrow, L_arrow
 import game_world
+import game_framework
 
 PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
-RUN_SPEED_KMPH = 5.0  # Km / Hour
+RUN_SPEED_KMPH = 20.0  # Km / Hour
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -72,7 +73,7 @@ class Player:
 
     def __init__(self):
         self.x, self.y = 200, 300
-        self.face_dir = 1
+        self.face_dir = -1
         self.image = load_image('animation_sheet.png')
         self.state_machine = StateMachine(self)
         self.state_machine.start(Idle)

@@ -1,5 +1,6 @@
 from pico2d import *
 import game_world
+from game_world import remove_collision_object
 
 
 class R_arrow:
@@ -25,12 +26,11 @@ class R_arrow:
     def handle_collision(self, group, other):
         if group == 'zombie:arrow':
             print('zombie hit by arrow')
-            game_world.remove_object(self)
-
+            remove_collision_object(self)
 class L_arrow:
     image = None
 
-    def __init__(self, x=400, y=300, velocity=1):
+    def __init__(self, x = 400, y = 300, velocity = 1):
         if L_arrow.image == None:
            L_arrow.image = load_image('left_arrow.png')
         self.x, self.y, self.velocity = x, y, -velocity
@@ -50,4 +50,4 @@ class L_arrow:
     def handle_collision(self, group, other):
         if group == 'zombie:arrow':
             print('zombie hit by arrow')
-            game_world.remove_object(self)
+            remove_collision_object(self)
